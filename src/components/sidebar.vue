@@ -36,7 +36,7 @@ export default {
 	},
 	created() {
 		this.$api
-	        .get(this.parent + "/sections/" + this.name)
+	        .load()
 	        .then(response => {
 	        	this.url = response.url
 	        	this.link = response.link

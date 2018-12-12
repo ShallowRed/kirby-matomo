@@ -89,7 +89,7 @@ export default {
 			this.loading = true
 			this.status  = 'loading'
 			this.$api
-		        .get(this.parent + "/sections/" + this.name)
+		        .load()
 		        .then(response => {
 		        	this.lang = response.lang
 		        	this.uri  = response.uri

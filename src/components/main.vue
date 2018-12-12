@@ -48,7 +48,7 @@ export default {
 	},
 	created() {
 		this.$api
-	        .get(this.parent + "/sections/" + this.name)
+	        .load()
 	        .then(response => {
 	        	this.periods  = response.periods
 	        	this.defaults = Object.assign(this.defaults, response.defaults)
