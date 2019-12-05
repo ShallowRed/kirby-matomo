@@ -304,7 +304,6 @@ The panel page widget displays metrics for a given page, both in single-language
 
 ![screenshot-page](https://user-images.githubusercontent.com/14079751/47636477-b9772b80-db58-11e8-94d4-1f8fee8ad0aa.jpg)
 
-
 #### 6.1. Basic blueprint example
 
 > Please make sure that you have included your `token_auth` in your config.
@@ -331,6 +330,21 @@ You can choose the period displayed, which can either be `year`, `month`, `week`
 matomo:
   type: matomo-page
   period: month
+```
+
+##### Custom URI
+
+Note that if you have some custom routing for a specific template, you should indicate to the page widget the correct way to build URIs:
+
+```yaml
+matomo:
+  type: matomo-page
+  # single language
+  customuri: '{{page.uri}}/{{page.slug}}'
+  # multilanguage
+  customuri:
+    en: '{{page.uri('en')}}/{{page.slug('en')}}'
+    fr: '{{page.uri('fr')}}/{{page.slug('fr')}}'
 ```
 
 ##### Multi-language overview

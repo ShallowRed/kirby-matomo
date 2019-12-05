@@ -66,19 +66,28 @@ Kirby::plugin('sylvainjule/matomo', array(
         		'period' => function($period = 'month') {
         			return $period;
         		},
+                'customuri' => function($customuri = null) {
+                    return $customuri;
+                },
         	),
         	'computed' => array(
         		'uri' => function() {
+                    $customuri = $this->customuri;
         			if(kirby()->multilang()) {
         				$uris = [];
         				foreach(kirby()->languages() as $language) {
         					$code = $language->code();
-        					$uris[$code] = $this->model()->uri($code);
+                            if($customuri && is_array($customuri) && array_key_exists($code, $customuri)) {
+            					$uris[$code] = $this->model()->toString($this->customuri[$code]);
+                            }
+                            else {
+                                $uris[$code] = $this->model()->uri($code);
+                            }
         				}
         				return $uris;
         			}
         			else {
-        				return $this->model()->uri();
+        				return $this->customuri ? $this->model()->toString($this->customuri) : $this->model()->uri();
         			}
         		},
         		'lang' => function() {
